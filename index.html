@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>VetNetcodip — Planes y Precios</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  @import url('data:text/css,');
+</style>
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
@@ -15,7 +15,7 @@
   --w:#ffffff; --g400:#9ca3af; --g500:#6b7280;
 }
 html { scroll-behavior:smooth; }
-body { font-family:'Inter',sans-serif; background:#0a0f0d; color:var(--w); overflow-x:hidden; }
+body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Inter',Roboto,Helvetica,Arial,sans-serif; background:#0a0f0d; color:var(--w); overflow-x:hidden; }
 
 /* URGENCY BAR */
 .urgency-bar {
@@ -516,152 +516,165 @@ footer em { color:var(--g); font-style:normal; }
 </div>
 
 <script>
-const plans = [
-  { id:'basico', name:'Básico', desc:'Para clínicas pequeñas que recién empiezan a digitalizar.', promo:39, regular:59,
-    features:[{ok:true,t:'Hasta 2 veterinarios'},{ok:true,t:'Dashboard y citas'},{ok:true,t:'Mascotas y propietarios'},{ok:true,t:'Historia clínica básica'},{ok:true,t:'Facturación'},{ok:false,t:'Inventario y stock'},{ok:false,t:'Cierre de caja'},{ok:false,t:'Reportes avanzados'},{ok:false,t:'Consentimientos digitales'},{ok:false,t:'WhatsApp y carnet QR'}] },
-  { id:'profesional', name:'Profesional', desc:'Para clínicas en crecimiento que necesitan más funciones.', promo:59, regular:89,
-    features:[{ok:true,t:'Hasta 5 veterinarios'},{ok:true,t:'Dashboard y citas'},{ok:true,t:'Mascotas y propietarios'},{ok:true,t:'Historia clínica completa'},{ok:true,t:'Facturación + anulación'},{ok:true,t:'Inventario y stock'},{ok:true,t:'Cierre de caja'},{ok:true,t:'Reportes avanzados'},{ok:false,t:'Consentimientos digitales'},{ok:false,t:'WhatsApp y carnet QR'}] },
-];G
-const allPlans = [...plans, { id:'clinica', name:'Clínica PRO', desc:'Todo incluido. El plan más completo del mercado.', promo:79, regular:119,
-  features:[{ok:true,t:'Veterinarios ilimitados'},{ok:true,t:'Dashboard y citas'},{ok:true,t:'Mascotas y propietarios'},{ok:true,t:'Historia clínica completa'},{ok:true,t:'Facturación + anulación'},{ok:true,t:'Inventario y stock'},{ok:true,t:'Cierre de caja'},{ok:true,t:'Reportes avanzados'},{ok:true,t:'Consentimientos digitales'},{ok:true,t:'WhatsApp y carnet QR'}] }];
+// Variables globales para los onclick inline del HTML
+var rlCy = 'mensual';
+var hpCy = 'mensual';
 
-const cy = { mensual:{m:1}, trimestral:{m:3,lbl:'cada 3 meses'}, semestral:{m:6,lbl:'cada 6 meses'}, anual:{m:12,lbl:'al año'} };
-const chk=`<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>`;
-const xmk=`<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>`;
-
-let rlCy='mensual', hpCy='mensual';
-
-function feats(arr){ return arr.map(f=>`<li class="${f.ok?'on':'off'}"><span class="${f.ok?'ico-ok':'ico-no'}">${f.ok?chk:xmk}</span><span>${f.t}</span></li>`).join(''); }
-
-/* REGULAR */
-function setRL(c){
-  rlCy=c;
-  ['mensual','trimestral','semestral','anual'].forEach(k=>document.getElementById('rl-'+k).classList.toggle('active',k===c));
+function setRL(c) {
+  rlCy = c;
+  ['mensual','trimestral','semestral','anual'].forEach(function(k){
+    var el = document.getElementById('rl-'+k);
+    if(el) el.classList.toggle('active', k===c);
+  });
   renderRegular();
 }
-function renderRegular(){
-  const {m,lbl}=cy[rlCy];
-  document.getElementById('regularGrid').innerHTML=allPlans.map(p=>{
-    const tot=p.regular*m, ts=m>1?`Total: S/.${tot} ${lbl}`:'&nbsp;';
-    return `<div class="plan-card">
-      <div class="pname">${p.name}</div>
-      <div class="pprice-wrap"><span class="psym">S/.</span><span class="pnum">${p.regular}</span><span class="pmo">/mes</span></div>
-      <div class="ptotal">${ts}</div>
-      <div class="pdesc">${p.desc}</div>
-      <ul class="feats">${feats(p.features)}</ul>
-      <button class="btn-select" onclick="document.getElementById('promo').scrollIntoView({behavior:'smooth'})">Ver precio con descuento →</button>
-    </div>`;
-  }).join('');
-}
 
-/* PROMO */
-function setHP(c){
-  hpCy=c;
-  ['mensual','trimestral','semestral','anual'].forEach(k=>document.getElementById('hp-'+k).classList.toggle('active',k===c));
-  const {m,lbl}=cy[c];
-  const tot=79*m, saved=119*m-tot;
-  document.getElementById('hpc-cycle-lbl').textContent=m===1?'pago mensual':`pago ${lbl}`;
-  document.getElementById('hpc-total').textContent=m>1?`Total: S/.${tot} ${lbl}`:'';
-  document.getElementById('hpc-save').textContent=`Ahorras S/.${saved} ${m>1?lbl:'al mes'}`;
-  const precio = m>1 ? `S/.${79*m} ${lbl}` : 'S/.79/mes';
-  document.getElementById('hp-cta').onclick=()=>openModal('Clínica PRO', precio, c);
+function setHP(c) {
+  hpCy = c;
+  ['mensual','trimestral','semestral','anual'].forEach(function(k){
+    var el = document.getElementById('hp-'+k);
+    if(el) el.classList.toggle('active', k===c);
+  });
+  var m = cy[c].m, lbl = cy[c].lbl;
+  var tot = 79*m, saved = 119*m - tot;
+  document.getElementById('hpc-cycle-lbl').textContent = m===1 ? 'pago mensual' : 'pago '+lbl;
+  document.getElementById('hpc-total').textContent = m>1 ? 'Total: S/.'+tot+' '+lbl : '';
+  document.getElementById('hpc-save').textContent = 'Ahorras S/.'+saved+' '+(m>1?lbl:'al mes');
+  var precio = m>1 ? 'S/.'+tot+' '+lbl : 'S/.79/mes';
+  document.getElementById('hp-cta').onclick = function(){ openModal('Clínica PRO', precio, c); };
   renderOtherPromos();
 }
-function renderOtherPromos(){
-  const {m,lbl}=cy[hpCy];
-  document.getElementById('otherPromos').innerHTML=plans.map(p=>{
-    const pt=p.promo*m, rt=p.regular*m, saved=rt-pt;
-    const precio = m>1 ? `S/.${pt} ${lbl}` : `S/.${p.promo}/mes`;
-    return `<div class="op-card">
-      <span class="op-promo-tag">🏷 Promo hasta 31 ago 2026</span>
-      <div class="pname">${p.name}</div>
-      <div class="pprice-wrap"><span class="psym">S/.</span><span class="pnum">${p.promo}</span><span class="pmo">/mes</span></div>
-      <div class="op-old">Antes <s>S/.${p.regular}/mes</s></div>
-      <div class="op-total">${m>1?'Total: S/.'+pt+' '+lbl:'&nbsp;'}</div>
-      <div class="op-save">Ahorras S/.${saved} ${m>1?lbl:'al mes'}</div>
-      <div class="op-desc">${p.desc}</div>
-      <ul class="feats">${feats(p.features)}</ul>
-      <button class="btn-select" onclick="openModal('${p.name}','${precio}','${hpCy}')">Quiero el plan ${p.name} →</button>
-    </div>`;
-  }).join('');
-}
 
-/* MODAL */
-function openModal(plan, precio, ciclo){
-  document.getElementById('m-plan').value  = plan;
-  document.getElementById('m-ciclo').value = ciclo;
-  document.getElementById('m-precio').value= precio;
-  document.getElementById('modalPlanPill').textContent = `📦 ${plan} · ${precio}`;
-  document.getElementById('modalForm').style.display='block';
-  document.getElementById('modalSuccess').style.display='none';
-  document.getElementById('mSubmitBtn').disabled=false;
-  document.getElementById('mSubmitBtn').textContent='Enviar mis datos →';
-  // limpiar errores
-  ['nombre','whatsapp','clinica','pais'].forEach(f=>{document.getElementById('me-'+f).style.display='none';});
+function openModal(plan, precio, ciclo) {
+  document.getElementById('m-plan').value   = plan;
+  document.getElementById('m-ciclo').value  = ciclo;
+  document.getElementById('m-precio').value = precio;
+  document.getElementById('modalPlanPill').textContent = '📦 '+plan+' · '+precio;
+  document.getElementById('modalForm').style.display = 'block';
+  document.getElementById('modalSuccess').style.display = 'none';
+  document.getElementById('mSubmitBtn').disabled = false;
+  document.getElementById('mSubmitBtn').textContent = 'Enviar mis datos →';
+  ['nombre','whatsapp','clinica','pais'].forEach(function(f){
+    document.getElementById('me-'+f).style.display='none';
+  });
   document.getElementById('modalOverlay').classList.add('open');
-  document.body.style.overflow='hidden';
+  document.body.style.overflow = 'hidden';
 }
-function closeModal(){
+
+function closeModal() {
   document.getElementById('modalOverlay').classList.remove('open');
-  document.body.style.overflow='';
+  document.body.style.overflow = '';
 }
-function closeModalOutside(e){
-  if(e.target===document.getElementById('modalOverlay')) closeModal();
+
+function closeModalOutside(e) {
+  if(e.target === document.getElementById('modalOverlay')) closeModal();
 }
-document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeModal(); });
 
-function submitModal(){
-  const nombre   = document.getElementById('m-nombre').value.trim();
-  const whatsapp = document.getElementById('m-whatsapp').value.trim();
-  const clinica  = document.getElementById('m-clinica').value.trim();
-  const pais     = document.getElementById('m-pais').value;
-  const email    = document.getElementById('m-email').value.trim();
-  const msg      = document.getElementById('m-msg').value.trim();
-  const plan     = document.getElementById('m-plan').value;
-  const ciclo    = document.getElementById('m-ciclo').value;
-  const precio   = document.getElementById('m-precio').value;
+function tf(el) {
+  el.classList.toggle('open');
+  el.nextElementSibling.classList.toggle('open');
+}
 
-  let ok=true;
-  [['me-nombre',nombre],['me-whatsapp',whatsapp],['me-clinica',clinica],['me-pais',pais]].forEach(([id,val])=>{
-    document.getElementById(id).style.display=val?'none':'block';
-    if(!val) ok=false;
+function submitModal() {
+  var nombre   = document.getElementById('m-nombre').value.trim();
+  var whatsapp = document.getElementById('m-whatsapp').value.trim();
+  var clinica  = document.getElementById('m-clinica').value.trim();
+  var pais     = document.getElementById('m-pais').value;
+  var email    = document.getElementById('m-email').value.trim();
+  var msg      = document.getElementById('m-msg').value.trim();
+  var plan     = document.getElementById('m-plan').value;
+  var ciclo    = document.getElementById('m-ciclo').value;
+  var precio   = document.getElementById('m-precio').value;
+  var ok = true;
+  [['me-nombre',nombre],['me-whatsapp',whatsapp],['me-clinica',clinica],['me-pais',pais]].forEach(function(pair){
+    document.getElementById(pair[0]).style.display = pair[1] ? 'none' : 'block';
+    if(!pair[1]) ok = false;
   });
   if(!ok) return;
+  var btn = document.getElementById('mSubmitBtn');
+  btn.disabled = true; btn.textContent = 'Enviando...';
 
-  const btn=document.getElementById('mSubmitBtn');
-  btn.disabled=true; btn.textContent='Enviando...';
-
-  // ── ENDPOINT BACKEND ────────────────────────────────────
-  // Cuando tengas la API lista, descomenta esto:
+  // ── ENDPOINT BACKEND ─────────────────────────────────
   // fetch('/api/leads', {
   //   method:'POST',
   //   headers:{'Content-Type':'application/json'},
   //   body:JSON.stringify({nombre,whatsapp,clinica,pais,email,mensaje:msg,plan,ciclo,precio,fecha:new Date().toISOString()})
-  // }).then(r=>r.json()).then(()=>showSuccess(nombre,plan)).catch(()=>{ btn.disabled=false; btn.textContent='Enviar mis datos →'; });
+  // }).then(function(){ showSuccess(nombre,plan); }).catch(function(){ btn.disabled=false; btn.textContent='Enviar mis datos →'; });
 
-  // Por ahora simula envío exitoso:
-  setTimeout(()=>showSuccess(nombre,plan), 800);
+  setTimeout(function(){ showSuccess(nombre, plan); }, 800);
 }
 
-function showSuccess(nombre, plan){
-  document.getElementById('modalForm').style.display='none';
-  document.getElementById('ms-nombre').textContent=nombre.split(' ')[0];
-  document.getElementById('ms-plan').textContent=plan;
-  document.getElementById('modalSuccess').style.display='block';
+function showSuccess(nombre, plan) {
+  document.getElementById('modalForm').style.display = 'none';
+  document.getElementById('ms-nombre').textContent = nombre.split(' ')[0];
+  document.getElementById('ms-plan').textContent = plan;
+  document.getElementById('modalSuccess').style.display = 'block';
 }
 
-function tf(el){ el.classList.toggle('open'); el.nextElementSibling.classList.toggle('open'); }
+// Datos y render — se ejecutan al cargar
+var plans = [
+  { id:'basico', name:'Básico', desc:'Para clínicas pequeñas que recién empiezan a digitalizar.', promo:39, regular:59,
+    features:[{ok:true,t:'Hasta 2 veterinarios'},{ok:true,t:'Dashboard y citas'},{ok:true,t:'Mascotas y propietarios'},{ok:true,t:'Historia clínica básica'},{ok:true,t:'Facturación'},{ok:false,t:'Inventario y stock'},{ok:false,t:'Cierre de caja'},{ok:false,t:'Reportes avanzados'},{ok:false,t:'Consentimientos digitales'},{ok:false,t:'WhatsApp y carnet QR'}] },
+  { id:'profesional', name:'Profesional', desc:'Para clínicas en crecimiento que necesitan más funciones.', promo:59, regular:89,
+    features:[{ok:true,t:'Hasta 5 veterinarios'},{ok:true,t:'Dashboard y citas'},{ok:true,t:'Mascotas y propietarios'},{ok:true,t:'Historia clínica completa'},{ok:true,t:'Facturación + anulación'},{ok:true,t:'Inventario y stock'},{ok:true,t:'Cierre de caja'},{ok:true,t:'Reportes avanzados'},{ok:false,t:'Consentimientos digitales'},{ok:false,t:'WhatsApp y carnet QR'}] },
+];
+var allPlans = plans.concat([{ id:'clinica', name:'Clínica PRO', desc:'Todo incluido. El plan más completo del mercado.', promo:79, regular:119,
+  features:[{ok:true,t:'Veterinarios ilimitados'},{ok:true,t:'Dashboard y citas'},{ok:true,t:'Mascotas y propietarios'},{ok:true,t:'Historia clínica completa'},{ok:true,t:'Facturación + anulación'},{ok:true,t:'Inventario y stock'},{ok:true,t:'Cierre de caja'},{ok:true,t:'Reportes avanzados'},{ok:true,t:'Consentimientos digitales'},{ok:true,t:'WhatsApp y carnet QR'}] }]);
+
+var cy = { mensual:{m:1}, trimestral:{m:3,lbl:'cada 3 meses'}, semestral:{m:6,lbl:'cada 6 meses'}, anual:{m:12,lbl:'al año'} };
+var chk = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>';
+var xmk = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>';
+
+function feats(arr){ return arr.map(function(f){ return '<li class="'+(f.ok?'on':'off')+'"><span class="'+(f.ok?'ico-ok':'ico-no')+'">'+(f.ok?chk:xmk)+'</span><span>'+f.t+'</span></li>'; }).join(''); }
+
+/* REGULAR */
+function renderRegular(){
+  var c = cy[rlCy], m = c.m, lbl = c.lbl;
+  document.getElementById('regularGrid').innerHTML = allPlans.map(function(p){
+    var tot = p.regular*m, ts = m>1 ? 'Total: S/.'+tot+' '+lbl : '&nbsp;';
+    return '<div class="plan-card">'
+      +'<div class="pname">'+p.name+'</div>'
+      +'<div class="pprice-wrap"><span class="psym">S/.</span><span class="pnum">'+p.regular+'</span><span class="pmo">/mes</span></div>'
+      +'<div class="ptotal">'+ts+'</div>'
+      +'<div class="pdesc">'+p.desc+'</div>'
+      +'<ul class="feats">'+feats(p.features)+'</ul>'
+      +'<button class="btn-select" onclick="document.getElementById(\'promo\').scrollIntoView({behavior:\'smooth\'})">Ver precio con descuento →</button>'
+      +'</div>';
+  }).join('');
+}
+
+/* PROMO */
+function renderOtherPromos(){
+  var c = cy[hpCy], m = c.m, lbl = c.lbl;
+  document.getElementById('otherPromos').innerHTML = plans.map(function(p){
+    var pt = p.promo*m, rt = p.regular*m, saved = rt-pt;
+    var precio = m>1 ? 'S/.'+pt+' '+lbl : 'S/.'+p.promo+'/mes';
+    return '<div class="op-card">'
+      +'<span class="op-promo-tag">🏷 Promo hasta 31 ago 2026</span>'
+      +'<div class="pname">'+p.name+'</div>'
+      +'<div class="pprice-wrap"><span class="psym">S/.</span><span class="pnum">'+p.promo+'</span><span class="pmo">/mes</span></div>'
+      +'<div class="op-old">Antes <s>S/.'+p.regular+'/mes</s></div>'
+      +'<div class="op-total">'+(m>1?'Total: S/.'+pt+' '+lbl:'&nbsp;')+'</div>'
+      +'<div class="op-save">Ahorras S/.'+saved+' '+(m>1?lbl:'al mes')+'</div>'
+      +'<div class="op-desc">'+p.desc+'</div>'
+      +'<ul class="feats">'+feats(p.features)+'</ul>'
+      +'<button class="btn-select" onclick="openModal(\''+p.name+'\',\''+precio+'\',\''+hpCy+'\')">Quiero el plan '+p.name+' →</button>'
+      +'</div>';
+  }).join('');
+}
+
+document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeModal(); });
 
 function tick(){
-  const diff=new Date('2026-08-31T23:59:59')-new Date();
+  var diff = new Date('2026-08-31T23:59:59') - new Date();
   if(diff<=0) return;
-  document.getElementById('ucd-d').textContent=String(Math.floor(diff/86400000)).padStart(2,'0');
-  document.getElementById('ucd-h').textContent=String(Math.floor(diff%86400000/3600000)).padStart(2,'0');
-  document.getElementById('ucd-m').textContent=String(Math.floor(diff%3600000/60000)).padStart(2,'0');
-  document.getElementById('ucd-s').textContent=String(Math.floor(diff%60000/1000)).padStart(2,'0');
+  document.getElementById('ucd-d').textContent = String(Math.floor(diff/86400000)).padStart(2,'0');
+  document.getElementById('ucd-h').textContent = String(Math.floor(diff%86400000/3600000)).padStart(2,'0');
+  document.getElementById('ucd-m').textContent = String(Math.floor(diff%3600000/60000)).padStart(2,'0');
+  document.getElementById('ucd-s').textContent = String(Math.floor(diff%60000/1000)).padStart(2,'0');
 }
 
-renderRegular(); setHP('mensual'); tick(); setInterval(tick,1000);
+renderRegular(); setHP('mensual'); tick(); setInterval(tick, 1000);
 </script>
 </body>
 </html>
