@@ -2,480 +2,190 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>VetNetcodip — Planes y Precios</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐾</text></svg>">
+<title>VetNetcodip — Agenda tu Demo Gratis</title>
 <style>
-  @import url('data:text/css,');
-</style>
-<style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-:root {
-  --g:#10b981; --gd:#059669; --gdp:#064e35; --gbg:#031f15;
-  --am:#f59e0b; --red:#ef4444;
-  --w:#ffffff; --g400:#9ca3af; --g500:#6b7280;
-}
-html { scroll-behavior:smooth; }
-body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Inter',Roboto,Helvetica,Arial,sans-serif; background:#0a0f0d; color:var(--w); overflow-x:hidden; }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--g:#10b981;--gd:#059669;--gbg:#031f15;--am:#f59e0b;--w:#fff;--g400:#9ca3af;--g500:#6b7280}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#0a0f0d;color:var(--w);overflow-x:hidden}
 
 /* URGENCY BAR */
-.urgency-bar {
-  background:linear-gradient(90deg,#064e35,#10b981,#064e35);
-  background-size:200% 100%; animation:shimmer 4s linear infinite;
-  padding:10px 2rem; text-align:center;
-  font-size:13px; font-weight:600; color:var(--w);
-  display:flex; align-items:center; justify-content:center; gap:14px; flex-wrap:wrap;
-}
+.urgency-bar{background:linear-gradient(90deg,#064e35,#10b981,#064e35);background-size:200%;animation:shimmer 4s linear infinite;padding:9px 2rem;text-align:center;font-size:12px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap}
 @keyframes shimmer{0%{background-position:100% 0}100%{background-position:-100% 0}}
-.urgency-cd { display:flex; gap:5px; align-items:center; }
-.ucd { background:rgba(0,0,0,.3); border-radius:5px; padding:2px 8px; font-size:14px; font-weight:800; min-width:36px; text-align:center; }
-.ucd-sep { opacity:.7; font-weight:800; }
+.ucd-wrap{display:flex;gap:4px;align-items:center}
+.ucd{background:rgba(0,0,0,.3);border-radius:4px;padding:2px 7px;font-size:13px;font-weight:800;min-width:32px;text-align:center}
 
 /* NAV */
-.nav {
-  position:sticky; top:0; z-index:200;
-  background:rgba(10,15,13,.95); backdrop-filter:blur(16px);
-  border-bottom:1px solid rgba(16,185,129,.12);
-  padding:0 2rem; height:62px;
-  display:flex; align-items:center; justify-content:space-between;
-}
-.nav-brand { display:flex; align-items:center; gap:10px; text-decoration:none; }
-.nav-logo { width:36px; height:36px; border-radius:10px; background:var(--g); display:flex; align-items:center; justify-content:center; font-size:19px; }
-.nav-name { font-size:17px; font-weight:800; color:var(--w); }
-.nav-name em { color:var(--g); font-style:normal; }
-.nav-right { display:flex; align-items:center; gap:10px; }
-.nav-link { font-size:13px; color:var(--g400); text-decoration:none; transition:color .2s; }
-.nav-link:hover { color:var(--w); }
-.nav-btn { background:var(--g); color:var(--w); border:none; padding:9px 20px; border-radius:8px; font-size:13px; font-weight:700; cursor:pointer; font-family:inherit; text-decoration:none; }
-.nav-btn:hover { background:var(--gd); }
+.nav{position:sticky;top:0;z-index:100;background:rgba(10,15,13,.95);backdrop-filter:blur(16px);border-bottom:1px solid rgba(16,185,129,.12);padding:0 2rem;height:60px;display:flex;align-items:center;justify-content:space-between}
+.nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+.nav-logo{width:34px;height:34px;border-radius:9px;background:var(--g);display:flex;align-items:center;justify-content:center;font-size:18px}
+.nav-name{font-size:16px;font-weight:800;color:var(--w)}
+.nav-name em{color:var(--g);font-style:normal}
+.nav-cta{background:var(--g);color:var(--w);border:none;padding:8px 18px;border-radius:7px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;text-decoration:none}
+.nav-cta:hover{background:var(--gd)}
 
 /* HERO */
-.hero { position:relative; padding:7rem 2rem 5rem; text-align:center; overflow:hidden; }
-.hero-bg {
-  position:absolute; inset:0; pointer-events:none;
-  background:radial-gradient(ellipse 80% 50% at 50% -10%,rgba(16,185,129,.22) 0%,transparent 65%),
-             radial-gradient(ellipse 40% 30% at 20% 80%,rgba(16,185,129,.07) 0%,transparent 60%);
-}
-.hero-eyebrow { display:inline-flex; align-items:center; gap:7px; background:rgba(16,185,129,.1); border:1px solid rgba(16,185,129,.35); color:var(--g); font-size:12px; font-weight:700; padding:6px 16px; border-radius:100px; margin-bottom:1.8rem; letter-spacing:.05em; text-transform:uppercase; }
-.pulse { width:7px; height:7px; border-radius:50%; background:var(--g); animation:p 2s infinite; }
-@keyframes p{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.8)}}
-.hero h1 { font-size:clamp(2.4rem,6vw,4.2rem); font-weight:900; line-height:1.05; letter-spacing:-.04em; margin-bottom:1.3rem; }
-.hero h1 .g { color:var(--g); display:block; }
-.hero-sub { font-size:1.05rem; color:var(--g400); max-width:540px; margin:0 auto 2.5rem; line-height:1.7; }
-.price-hook { display:inline-flex; align-items:center; gap:16px; background:rgba(16,185,129,.08); border:1px solid rgba(16,185,129,.25); border-radius:16px; padding:1rem 2rem; margin-bottom:2.5rem; flex-wrap:wrap; justify-content:center; }
-.ph-lbl { font-size:13px; color:var(--g400); }
-.ph-old { font-size:1.6rem; font-weight:900; color:var(--g500); text-decoration:line-through; }
-.ph-arrow { font-size:1.2rem; color:var(--g); }
-.ph-new-wrap { display:flex; flex-direction:column; align-items:flex-start; }
-.ph-new { font-size:2.8rem; font-weight:900; color:var(--g); letter-spacing:-.04em; line-height:1; }
-.ph-new-lbl { font-size:11px; color:var(--g); opacity:.8; font-weight:600; }
-.ph-save { background:var(--am); color:#000; font-size:12px; font-weight:800; padding:4px 12px; border-radius:100px; }
-.hero-ctas { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-bottom:2.5rem; }
-.btn-main { background:var(--g); color:var(--w); border:none; padding:16px 36px; border-radius:10px; font-size:16px; font-weight:800; cursor:pointer; font-family:inherit; text-decoration:none; display:inline-block; box-shadow:0 0 40px rgba(16,185,129,.4); transition:all .2s; }
-.btn-main:hover { background:var(--gd); transform:translateY(-2px); box-shadow:0 0 55px rgba(16,185,129,.6); }
-.btn-ghost { background:transparent; color:var(--g400); border:1px solid rgba(255,255,255,.12); padding:16px 36px; border-radius:10px; font-size:16px; font-weight:600; cursor:pointer; font-family:inherit; text-decoration:none; display:inline-block; transition:all .2s; }
-.btn-ghost:hover { color:var(--w); border-color:rgba(255,255,255,.3); }
-.trust-row { display:flex; justify-content:center; gap:24px; flex-wrap:wrap; }
-.trust-item { font-size:12px; color:var(--g500); display:flex; align-items:center; gap:5px; }
-.trust-item::before { content:'✓'; color:var(--g); font-weight:800; }
+.hero{padding:5rem 2rem 4rem;text-align:center;position:relative;overflow:hidden}
+.hero-bg{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 80% 50% at 50% -10%,rgba(16,185,129,.2) 0%,transparent 65%)}
+.eyebrow{display:inline-flex;align-items:center;gap:7px;background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.35);color:var(--g);font-size:11px;font-weight:700;padding:5px 14px;border-radius:100px;margin-bottom:1.5rem;letter-spacing:.05em;text-transform:uppercase}
+.pulse{width:6px;height:6px;border-radius:50%;background:var(--g);animation:p 2s infinite}
+@keyframes p{0%,100%{opacity:1}50%{opacity:.3}}
+h1{font-size:clamp(2.2rem,5.5vw,3.8rem);font-weight:900;line-height:1.05;letter-spacing:-.04em;margin-bottom:1.2rem}
+h1 .g{color:var(--g);display:block}
+.hero-sub{font-size:1rem;color:var(--g400);max-width:500px;margin:0 auto 2rem;line-height:1.7}
+.trust-row{display:flex;justify-content:center;gap:20px;flex-wrap:wrap;margin-top:1.5rem}
+.trust-item{font-size:12px;color:var(--g500);display:flex;align-items:center;gap:5px}
+.trust-item::before{content:'✓';color:var(--g);font-weight:800}
 
-/* SECTIONS */
-.late-section { padding:4rem 2rem 1rem; max-width:1100px; margin:0 auto; }
-.promo-section { padding:0 2rem 5rem; max-width:1100px; margin:0 auto; }
-.sec-ey { text-align:center; font-size:11px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--g500); margin-bottom:.5rem; }
-.sec-h { text-align:center; font-size:clamp(1.4rem,3vw,2rem); font-weight:900; letter-spacing:-.02em; margin-bottom:.4rem; }
-.sec-sub { text-align:center; font-size:14px; color:var(--g400); margin-bottom:2rem; }
-.late-title .red { color:var(--red); }
+/* FORM CARD */
+.form-wrap{max-width:480px;margin:0 auto}
+.form-card{background:linear-gradient(135deg,#031f15,#052e1c);border:2px solid rgba(16,185,129,.4);border-radius:20px;padding:2rem;box-shadow:0 0 50px rgba(16,185,129,.15)}
+.form-card h2{font-size:1.3rem;font-weight:900;margin-bottom:.3rem;text-align:center}
+.form-card .fc-sub{font-size:13px;color:#86efac;text-align:center;margin-bottom:1.5rem}
+.field{display:flex;flex-direction:column;gap:5px;margin-bottom:.875rem}
+.field label{font-size:11px;font-weight:600;color:var(--g400);text-transform:uppercase;letter-spacing:.04em}
+.field input,.field select,.field textarea{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:8px;padding:11px 14px;font-size:14px;color:var(--w);font-family:inherit;outline:none;transition:border-color .2s;-webkit-appearance:none}
+.field input::placeholder{color:var(--g500)}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--g);background:rgba(16,185,129,.06)}
+.field select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;background-size:16px;padding-right:36px}
+.field select option{background:#0f1f17;color:var(--w)}
+.field textarea{resize:none;min-height:70px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:.875rem}
+.plan-select{display:flex;gap:6px;flex-wrap:wrap}
+.plan-btn{flex:1;min-width:80px;padding:8px 10px;border-radius:8px;border:1px solid rgba(255,255,255,.15);background:transparent;color:var(--g400);font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .15s;text-align:center}
+.plan-btn:hover{border-color:rgba(16,185,129,.4);color:var(--w)}
+.plan-btn.sel{background:rgba(16,185,129,.15);border-color:var(--g);color:var(--g)}
+.btn-submit{width:100%;padding:14px;background:var(--g);color:var(--w);border:none;border-radius:10px;font-size:16px;font-weight:800;cursor:pointer;font-family:inherit;margin-top:.25rem;transition:all .2s;box-shadow:0 0 30px rgba(16,185,129,.3)}
+.btn-submit:hover{background:var(--gd);box-shadow:0 0 45px rgba(16,185,129,.5)}
+.btn-submit:disabled{opacity:.6;cursor:not-allowed}
+.form-trust{text-align:center;font-size:11px;color:var(--g500);margin-top:.875rem}
+.err-msg{font-size:11px;color:#f87171;display:none;margin-top:2px}
+.success-card{display:none;text-align:center;padding:2rem 1rem}
+.sc-icon{font-size:56px;margin-bottom:.75rem}
+.sc-title{font-size:1.5rem;font-weight:900;color:var(--g);margin-bottom:.5rem}
+.sc-sub{font-size:14px;color:#86efac;line-height:1.7}
 
-/* TOGGLE */
-.toggle-wrap { display:flex; justify-content:center; margin-bottom:1.8rem; }
-.toggle { display:inline-flex; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.1); border-radius:10px; padding:3px; gap:2px; }
-.tbtn { padding:8px 18px; border-radius:7px; border:none; font-size:13px; font-weight:600; cursor:pointer; background:transparent; color:var(--g400); transition:all .18s; font-family:inherit; }
-.tbtn.active { background:rgba(255,255,255,.1); color:var(--w); border:1px solid rgba(255,255,255,.15); }
-
-/* PLAN CARDS */
-.plans-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:1rem; }
-.plan-card { background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08); border-radius:16px; padding:1.8rem; display:flex; flex-direction:column; }
-.pname { font-size:11px; font-weight:700; color:var(--g500); text-transform:uppercase; letter-spacing:.08em; margin-bottom:.7rem; }
-.pprice-wrap { display:flex; align-items:baseline; gap:2px; margin-bottom:.1rem; }
-.psym { font-size:1rem; font-weight:700; color:var(--w); }
-.pnum { font-size:2.6rem; font-weight:900; color:var(--w); line-height:1; letter-spacing:-.03em; }
-.pmo { font-size:12px; color:var(--g500); }
-.ptotal { font-size:12px; color:var(--g500); margin-bottom:1rem; min-height:18px; }
-.pdesc { font-size:13px; color:var(--g400); line-height:1.55; margin-bottom:1rem; padding-bottom:1rem; border-bottom:1px solid rgba(255,255,255,.07); }
-.feats { list-style:none; flex:1; display:flex; flex-direction:column; gap:8px; margin-bottom:1.5rem; }
-.feats li { font-size:13px; display:flex; align-items:flex-start; gap:8px; }
-.feats li.on { color:var(--g400); }
-.feats li.off { color:rgba(255,255,255,.2); }
-.ico-ok { color:var(--g); flex-shrink:0; }
-.ico-no { color:rgba(255,255,255,.2); flex-shrink:0; }
-.btn-select { width:100%; padding:12px; border-radius:8px; border:1px solid rgba(255,255,255,.15); background:transparent; color:var(--w); font-size:14px; font-weight:700; cursor:pointer; font-family:inherit; transition:all .2s; }
-.btn-select:hover { background:rgba(255,255,255,.07); border-color:rgba(255,255,255,.3); }
-.btn-select.green { background:var(--g); border:none; box-shadow:0 0 20px rgba(16,185,129,.3); }
-.btn-select.green:hover { background:var(--gd); box-shadow:0 0 35px rgba(16,185,129,.5); }
-
-/* DIVIDER */
-.divider-promo { max-width:1100px; margin:2.5rem auto; position:relative; display:flex; align-items:center; padding:0 2rem; }
-.dp-line { flex:1; border-top:1px dashed rgba(16,185,129,.3); }
-.dp-center { display:flex; align-items:center; gap:10px; padding:10px 20px; background:rgba(16,185,129,.1); border:1px solid rgba(16,185,129,.3); border-radius:100px; font-size:13px; font-weight:700; color:var(--g); white-space:nowrap; }
-.dp-arrow { animation:bob 1s infinite ease-in-out; display:inline-block; }
-@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(3px)}}
-
-/* PROMO HERO CARD */
-.hero-promo-wrap { background:linear-gradient(135deg,#031f15 0%,#052e1c 40%,#064e35 100%); border:2px solid var(--g); border-radius:24px; padding:2.5rem; margin-bottom:1rem; position:relative; overflow:hidden; box-shadow:0 0 60px rgba(16,185,129,.2); }
-.hero-promo-wrap::before { content:''; position:absolute; top:-100px; right:-100px; width:350px; height:350px; background:radial-gradient(circle,rgba(16,185,129,.15),transparent 65%); pointer-events:none; }
-.hero-promo-wrap::after { content:''; position:absolute; bottom:-80px; left:-60px; width:250px; height:250px; background:radial-gradient(circle,rgba(16,185,129,.08),transparent 65%); pointer-events:none; }
-.hero-promo-inner { position:relative; display:grid; grid-template-columns:1fr auto 1fr; gap:2rem; align-items:center; }
-@media(max-width:768px){.hero-promo-inner{grid-template-columns:1fr;text-align:center}.hero-promo-center{border-left:none!important;border-right:none!important;border-top:1px solid rgba(16,185,129,.2);border-bottom:1px solid rgba(16,185,129,.2);padding:1.5rem 0!important}}
-.hp-rec-badge { position:absolute; top:-36px; left:50%; transform:translateX(-50%); background:var(--g); color:var(--w); font-size:12px; font-weight:800; padding:6px 20px; border-radius:100px; white-space:nowrap; }
-.hp-left .plan-tag { font-size:11px; font-weight:700; color:#6ee7b7; text-transform:uppercase; letter-spacing:.08em; margin-bottom:.5rem; }
-.hp-left h3 { font-size:1.8rem; font-weight:900; color:var(--w); letter-spacing:-.025em; margin-bottom:.5rem; }
-.hp-left p { font-size:13px; color:#86efac; line-height:1.6; margin-bottom:1.2rem; }
-.hp-feat-grid { display:grid; grid-template-columns:1fr 1fr; gap:6px; }
-.hp-feat { font-size:12px; color:#86efac; display:flex; align-items:center; gap:6px; }
-.hp-feat::before { content:'✓'; color:var(--g); font-weight:800; flex-shrink:0; }
-.hero-promo-center { text-align:center; border-left:1px solid rgba(16,185,129,.2); border-right:1px solid rgba(16,185,129,.2); padding:0 2rem; }
-.hpc-cycle { font-size:11px; color:#6ee7b7; margin-bottom:.4rem; opacity:.8; }
-.hpc-old { font-size:14px; color:#6ee7b7; text-decoration:line-through; opacity:.65; margin-bottom:.2rem; }
-.hpc-price { display:flex; align-items:flex-start; justify-content:center; gap:2px; line-height:1; margin-bottom:.3rem; }
-.hpc-sym { font-size:1.6rem; font-weight:900; color:var(--g); padding-top:8px; }
-.hpc-num { font-size:6rem; font-weight:900; color:var(--w); letter-spacing:-.04em; }
-.hpc-mo { font-size:13px; color:#6ee7b7; margin-bottom:.4rem; }
-.hpc-total { font-size:12px; color:#6ee7b7; opacity:.8; margin-bottom:.8rem; min-height:18px; }
-.hpc-save-pill { display:inline-block; background:var(--am); color:#000; font-size:12px; font-weight:800; padding:4px 14px; border-radius:100px; margin-bottom:.6rem; }
-.hpc-promo-tag { font-size:11px; color:#6ee7b7; opacity:.75; }
-.hp-right { display:flex; flex-direction:column; align-items:center; gap:12px; }
-.hp-toggle { display:flex; flex-direction:column; align-items:center; gap:6px; width:100%; }
-.hp-toggle small { font-size:11px; color:#6ee7b7; opacity:.7; }
-.hp-trow { display:flex; gap:4px; }
-.hptbtn { padding:5px 10px; border-radius:6px; border:1px solid rgba(16,185,129,.3); background:transparent; color:#6ee7b7; font-size:11px; font-weight:600; cursor:pointer; font-family:inherit; transition:all .18s; }
-.hptbtn.active { background:var(--g); color:var(--w); border-color:var(--g); }
-.hp-trust { font-size:11px; color:#6ee7b7; opacity:.75; text-align:center; line-height:1.6; }
-.other-promos { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:1rem; }
-.op-card { background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08); border-radius:16px; padding:1.8rem; display:flex; flex-direction:column; }
-.op-promo-tag { display:inline-block; background:rgba(245,158,11,.12); border:1px solid rgba(245,158,11,.3); color:#fcd34d; font-size:10px; font-weight:700; padding:3px 10px; border-radius:100px; margin-bottom:.8rem; }
-.op-old { font-size:12px; color:var(--g500); margin-bottom:.15rem; }
-.op-total { font-size:12px; color:var(--g500); margin-bottom:.4rem; min-height:18px; }
-.op-save { font-size:12px; font-weight:700; color:var(--am); margin-bottom:.8rem; }
-.op-desc { font-size:13px; color:var(--g400); line-height:1.55; margin-bottom:1rem; padding-bottom:1rem; border-bottom:1px solid rgba(255,255,255,.07); }
-
-/* ── MODAL ── */
-.modal-overlay {
-  display:none; position:fixed; inset:0; z-index:1000;
-  background:rgba(0,0,0,.75); backdrop-filter:blur(6px);
-  align-items:center; justify-content:center; padding:1rem;
-}
-.modal-overlay.open { display:flex; }
-.modal {
-  background:#0f1f17; border:1px solid rgba(16,185,129,.3);
-  border-radius:20px; padding:2rem; width:100%; max-width:480px;
-  position:relative; animation:slideUp .25s ease;
-  max-height:90vh; overflow-y:auto;
-}
-@keyframes slideUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-.modal-close { position:absolute; top:14px; right:16px; background:rgba(255,255,255,.08); border:none; color:var(--g400); width:30px; height:30px; border-radius:50%; font-size:16px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all .2s; }
-.modal-close:hover { background:rgba(255,255,255,.15); color:var(--w); }
-.modal-eyebrow { font-size:10px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--g); margin-bottom:.4rem; }
-.modal-title { font-size:1.3rem; font-weight:900; color:var(--w); margin-bottom:.3rem; letter-spacing:-.02em; }
-.modal-sub { font-size:13px; color:var(--g400); margin-bottom:1.2rem; line-height:1.5; }
-.modal-plan-pill { display:inline-flex; align-items:center; gap:6px; background:rgba(16,185,129,.12); border:1px solid rgba(16,185,129,.3); color:#6ee7b7; font-size:12px; font-weight:700; padding:5px 14px; border-radius:100px; margin-bottom:1.4rem; }
-.modal-form { display:flex; flex-direction:column; gap:10px; }
-.form-row2 { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:10px; }
-@media(max-width:480px){.form-row2{grid-template-columns:1fr}}
-.form-input, .form-select { width:100%; min-width:0; }
-.form-group { display:flex; flex-direction:column; gap:4px; }
-.form-label { font-size:11px; font-weight:600; color:var(--g400); }
-.form-input, .form-select {
-  background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.12);
-  border-radius:8px; padding:11px 14px;
-  font-size:14px; color:var(--w); font-family:inherit;
-  transition:border-color .2s; outline:none;
-  -webkit-appearance:none; appearance:none;
-}
-.form-input::placeholder { color:var(--g500); }
-.form-input:focus, .form-select:focus { border-color:var(--g); background:rgba(16,185,129,.06); }
-.form-select { background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 12px center; background-size:16px; padding-right:36px; }
-.form-select option { background:#0f1f17; color:var(--w); }
-.form-err { font-size:11px; color:#f87171; display:none; margin-top:2px; }
-.btn-submit { background:var(--g); color:var(--w); border:none; padding:14px; border-radius:8px; font-size:15px; font-weight:800; cursor:pointer; font-family:inherit; transition:all .2s; margin-top:4px; }
-.btn-submit:hover { background:var(--gd); }
-.btn-submit:disabled { opacity:.6; cursor:not-allowed; }
-.modal-success { display:none; text-align:center; padding:1.5rem 0; }
-.ms-icon { font-size:3rem; margin-bottom:.5rem; }
-.ms-title { font-size:1.2rem; font-weight:900; color:var(--g); margin-bottom:.4rem; }
-.ms-sub { font-size:13px; color:#86efac; line-height:1.6; }
+/* WHY */
+.why{padding:4rem 2rem;max-width:900px;margin:0 auto}
+.why-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin-top:2rem}
+.why-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:1.25rem;display:flex;gap:12px;align-items:flex-start}
+.why-icon{font-size:24px;flex-shrink:0}
+.why-title{font-size:14px;font-weight:700;margin-bottom:4px}
+.why-desc{font-size:12px;color:var(--g400);line-height:1.5}
 
 /* MODULES */
-.mod-section { background:rgba(255,255,255,.02); border-top:1px solid rgba(255,255,255,.06); border-bottom:1px solid rgba(255,255,255,.06); padding:4rem 2rem; }
-.mod-inner { max-width:1100px; margin:0 auto; }
-.mods-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(175px,1fr)); gap:10px; margin-top:2rem; }
-.mod-c { background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.07); border-radius:10px; padding:1rem 1.1rem; display:flex; align-items:center; gap:12px; transition:border-color .2s; }
-.mod-c:hover { border-color:rgba(16,185,129,.4); }
-.mod-em { font-size:20px; flex-shrink:0; }
-.mod-n { font-size:13px; font-weight:600; color:var(--w); }
-.mod-d { font-size:11px; color:var(--g500); margin-top:2px; }
+.mods{padding:3rem 2rem;background:rgba(255,255,255,.02);border-top:1px solid rgba(255,255,255,.06)}
+.mods-inner{max-width:900px;margin:0 auto}
+.mods-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:8px;margin-top:1.5rem}
+.mod{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:9px;padding:.875rem 1rem;display:flex;align-items:center;gap:10px}
+.mod-em{font-size:18px;flex-shrink:0}
+.mod-n{font-size:13px;font-weight:600}
+.mod-d{font-size:10px;color:var(--g500);margin-top:1px}
+
+/* SEC */
+.sec-ey{text-align:center;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--g500);margin-bottom:.4rem}
+.sec-h{text-align:center;font-size:clamp(1.3rem,3vw,1.8rem);font-weight:900;letter-spacing:-.02em;margin-bottom:.4rem}
+.sec-sub{text-align:center;font-size:13px;color:var(--g400)}
 
 /* FAQ */
-.faq-sec { padding:4rem 2rem; max-width:680px; margin:0 auto; }
-.faq-item { border-bottom:1px solid rgba(255,255,255,.07); }
-.faq-q { padding:1.1rem 0; font-size:14px; font-weight:600; color:var(--w); display:flex; justify-content:space-between; align-items:center; cursor:pointer; gap:1rem; user-select:none; transition:color .2s; }
-.faq-q:hover { color:var(--g); }
-.faq-ico { width:16px; height:16px; flex-shrink:0; transition:transform .25s; }
-.faq-q.open .faq-ico { transform:rotate(180deg); }
-.faq-a { font-size:13px; color:var(--g400); line-height:1.7; max-height:0; overflow:hidden; transition:max-height .3s ease, padding-bottom .2s; }
-.faq-a.open { max-height:220px; padding-bottom:1.1rem; }
+.faq{padding:3rem 2rem;max-width:620px;margin:0 auto}
+.faq-item{border-bottom:1px solid rgba(255,255,255,.07)}
+.faq-q{padding:1rem 0;font-size:14px;font-weight:600;display:flex;justify-content:space-between;align-items:center;cursor:pointer;gap:1rem;user-select:none;transition:color .2s}
+.faq-q:hover{color:var(--g)}
+.faq-ico{width:14px;height:14px;flex-shrink:0;transition:transform .25s}
+.faq-q.open .faq-ico{transform:rotate(180deg)}
+.faq-a{font-size:13px;color:var(--g400);line-height:1.7;max-height:0;overflow:hidden;transition:max-height .3s,padding-bottom .2s}
+.faq-a.open{max-height:200px;padding-bottom:1rem}
 
 /* BOTTOM CTA */
-.bcta { text-align:center; padding:5rem 2rem 6rem; background:linear-gradient(180deg,transparent,rgba(16,185,129,.07) 50%,transparent); }
-.bcta h2 { font-size:clamp(1.7rem,4vw,2.8rem); font-weight:900; letter-spacing:-.03em; margin-bottom:.6rem; }
-.bcta h2 .g { color:var(--g); }
-.bcta p { font-size:15px; color:var(--g400); margin-bottom:2rem; }
-.bcta-btns { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-bottom:1.8rem; }
-.guar-row { display:flex; justify-content:center; gap:20px; flex-wrap:wrap; }
-.guar-item { font-size:12px; color:var(--g500); display:flex; align-items:center; gap:5px; }
-.guar-item::before { content:'✓'; color:var(--g); font-weight:800; }
+.bcta{text-align:center;padding:4rem 2rem 5rem}
+.bcta h2{font-size:clamp(1.6rem,4vw,2.5rem);font-weight:900;letter-spacing:-.03em;margin-bottom:.5rem}
+.bcta h2 .g{color:var(--g)}
+.bcta p{font-size:14px;color:var(--g400);margin-bottom:1.5rem}
 
-footer { border-top:1px solid rgba(255,255,255,.06); padding:2rem; text-align:center; font-size:12px; color:var(--g500); }
-footer em { color:var(--g); font-style:normal; }
+footer{border-top:1px solid rgba(255,255,255,.06);padding:1.5rem;text-align:center;font-size:12px;color:var(--g500)}
+footer em{color:var(--g);font-style:normal}
 
 @media(max-width:640px){
-  .nav{padding:0 1rem} .nav-link{display:none}
-  .hero{padding:5rem 1rem 3.5rem}
-  .price-hook{padding:.8rem 1rem} .ph-old{font-size:1.2rem} .ph-new{font-size:2.2rem}
-  .late-section,.promo-section{padding-left:1rem;padding-right:1rem}
-  .hero-promo-wrap{padding:2rem 1.2rem} .hpc-num{font-size:4.5rem}
+  .nav{padding:0 1rem}
+  .hero{padding:4rem 1rem 3rem}
+  .grid2{grid-template-columns:1fr}
+  .form-card{padding:1.5rem}
 }
 </style>
 </head>
 <body>
 
-<!-- URGENCY BAR -->
 <div class="urgency-bar">
-  <span>⚡ Promoción activa — Termina el 31 de agosto 2026</span>
-  <div class="urgency-cd">
-    <div class="ucd" id="ucd-d">--</div><span class="ucd-sep">d</span>
-    <div class="ucd" id="ucd-h">--</div><span class="ucd-sep">h</span>
-    <div class="ucd" id="ucd-m">--</div><span class="ucd-sep">m</span>
-    <div class="ucd" id="ucd-s">--</div><span class="ucd-sep">s</span>
+  <span>⚡ Oferta especial — Termina el 31 de agosto 2026</span>
+  <div class="ucd-wrap">
+    <div class="ucd" id="ud">--</div><span>d</span>
+    <div class="ucd" id="uh">--</div><span>h</span>
+    <div class="ucd" id="um">--</div><span>m</span>
+    <div class="ucd" id="us">--</div><span>s</span>
   </div>
 </div>
 
-<!-- NAV -->
 <nav class="nav">
   <a class="nav-brand" href="#">
     <div class="nav-logo">🐾</div>
     <div class="nav-name">Vet<em>Netcodip</em></div>
   </a>
-  <div class="nav-right">
-    <a class="nav-link" href="#modulos">Módulos</a>
-    <a class="nav-link" href="#faq">FAQ</a>
-    <a class="nav-btn" href="#promo">Ver oferta</a>
-  </div>
+  <a class="nav-cta" href="#demo">Agendar demo gratis</a>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
   <div class="hero-bg"></div>
-  <div class="hero-eyebrow"><span class="pulse"></span> Oferta especial · Solo hasta el 31 de agosto 2026</div>
-  <h1>Gestiona tu clínica.<br><span class="g">Ahorra desde ya.</span></h1>
-  <p class="hero-sub">12 módulos en un solo sistema — citas, historiales, inventario, facturación, caja y más. Pensado para veterinarias latinoamericanas.</p>
-  <div class="price-hook">
-    <span class="ph-lbl">Plan Clínica PRO</span>
-    <span class="ph-old">S/.119</span>
-    <span class="ph-arrow">→</span>
-    <div class="ph-new-wrap">
-      <span class="ph-new">S/.79</span>
-      <span class="ph-new-lbl">/mes durante la promo</span>
+  <div class="eyebrow"><span class="pulse"></span>Demo gratuita · 30 minutos · Sin compromiso</div>
+  <h1>Gestiona tu clínica<br><span class="g">sin complicaciones.</span></h1>
+  <p class="hero-sub">Te mostramos en vivo cómo VetNetcodip transforma la gestión de tu veterinaria. 12 módulos integrados, configurados para tu negocio.</p>
+  <div class="form-wrap">
+    <div style="background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.2);border-radius:12px;padding:.875rem 1.25rem;margin-bottom:1.5rem;font-size:13px;color:#86efac;text-align:center">
+      🎁 <b>Solo hasta el 31 de agosto:</b> Plan Clínica PRO a <b>S/.79/mes</b> en vez de S/.119
     </div>
-    <span class="ph-save">Ahorras S/.40/mes</span>
-  </div>
-  <div class="hero-ctas">
-    <button class="btn-main" onclick="openModal('Clínica PRO','S/.79/mes','mensual')">Ver planes con descuento</button>
-    <a class="btn-ghost" href="#modulos">¿Qué incluye?</a>
   </div>
   <div class="trust-row">
-    <span class="trust-item">14 días gratis</span>
-    <span class="trust-item">Sin contrato</span>
-    <span class="trust-item">Cancela cuando quieras</span>
-    <span class="trust-item">Soporte en español</span>
+    <div class="trust-item">Demo 100% gratuita</div>
+    <div class="trust-item">14 días de prueba</div>
+    <div class="trust-item">Sin contrato</div>
+    <div class="trust-item">Soporte en español</div>
   </div>
 </section>
 
-<!-- LATE PRICES -->
-<div class="late-section">
-  <div class="sec-ey">Precios de referencia</div>
-  <div class="sec-h late-title">El precio que pagan <span class="red">los que llegan tarde</span></div>
-  <div class="sec-sub">Precio regular sin descuento — válido una vez termine la promoción</div>
-  <div class="toggle-wrap">
-    <div class="toggle">
-      <button class="tbtn active" id="rl-mensual"    onclick="setRL('mensual')">Mensual</button>
-      <button class="tbtn"        id="rl-trimestral" onclick="setRL('trimestral')">Trimestral</button>
-      <button class="tbtn"        id="rl-semestral"  onclick="setRL('semestral')">Semestral</button>
-      <button class="tbtn"        id="rl-anual"      onclick="setRL('anual')">Anual</button>
-    </div>
-  </div>
-  <div class="plans-grid" id="regularGrid" style="max-width:1100px;margin:0 auto"></div>
-</div>
+<!-- FORM DEMO -->
+<div id="demo" style="padding:0 2rem 4rem">
+  <div class="form-wrap">
+    <div class="form-card">
+      <div id="formView">
+        <h2>📅 Agenda tu demo gratis</h2>
+        <p class="fc-sub">Completa el formulario y te contactamos en menos de 2 horas</p>
 
-<!-- DIVIDER -->
-<div class="divider-promo">
-  <div class="dp-line"></div>
-  <div class="dp-center"><span class="dp-arrow">👇</span>Pero si actúas ahora, pagas esto<span class="dp-arrow">👇</span></div>
-  <div class="dp-line"></div>
-</div>
-
-<!-- PROMO SECTION -->
-<div id="promo" class="promo-section">
-  <div class="sec-ey" style="margin-bottom:.5rem">🏷 Precios promocionales · Hasta el 31 agosto 2026</div>
-  <div class="sec-h" style="margin-bottom:.3rem">El mismo sistema. <span style="color:var(--g)">Mucho menos.</span></div>
-  <div class="sec-sub">Elige tu plan y te contactamos para activarlo</div>
-
-  <div class="hero-promo-wrap" style="margin-top:2rem">
-    <span class="hp-rec-badge">⭐ Recomendado · Mejor valor del mercado</span>
-    <div class="hero-promo-inner">
-      <div class="hp-left">
-        <div class="plan-tag">Clínica PRO · Todo incluido</div>
-        <h3>El plan que tu clínica necesita</h3>
-        <p>Veterinarios ilimitados, todos los módulos activos, sin restricciones.</p>
-        <div class="hp-feat-grid">
-          <div class="hp-feat">Veterinarios ilimitados</div>
-          <div class="hp-feat">Historia clínica completa</div>
-          <div class="hp-feat">Inventario y stock</div>
-          <div class="hp-feat">Cierre de caja</div>
-          <div class="hp-feat">Facturación + anulación</div>
-          <div class="hp-feat">Reportes avanzados</div>
-          <div class="hp-feat">Consentimientos digitales</div>
-          <div class="hp-feat">WhatsApp y carnet QR</div>
-        </div>
-      </div>
-      <div class="hero-promo-center">
-        <div class="hpc-cycle" id="hpc-cycle-lbl">pago mensual</div>
-        <div class="hpc-old">Antes S/.119/mes</div>
-        <div class="hpc-price"><span class="hpc-sym">S/.</span><span class="hpc-num">79</span></div>
-        <div class="hpc-mo">/mes</div>
-        <div class="hpc-total" id="hpc-total">&nbsp;</div>
-        <div class="hpc-save-pill" id="hpc-save">Ahorras S/.40/mes</div>
-        <div class="hpc-promo-tag">🏷 Promo hasta 31 ago 2026</div>
-      </div>
-      <div class="hp-right">
-        <div class="hp-toggle">
-          <small>Ciclo de pago</small>
-          <div class="hp-trow">
-            <button class="hptbtn active" id="hp-mensual"    onclick="setHP('mensual')">Mensual</button>
-            <button class="hptbtn"        id="hp-trimestral" onclick="setHP('trimestral')">Trimestral</button>
+        <div class="grid2">
+          <div class="field">
+            <label>Nombre completo *</label>
+            <input id="f-nombre" type="text" placeholder="Dr. Juan Pérez">
+            <span class="err-msg" id="e-nombre">Requerido</span>
           </div>
-          <div class="hp-trow">
-            <button class="hptbtn"        id="hp-semestral"  onclick="setHP('semestral')">Semestral</button>
-            <button class="hptbtn"        id="hp-anual"      onclick="setHP('anual')">Anual</button>
+          <div class="field">
+            <label>WhatsApp *</label>
+            <input id="f-wa" type="tel" placeholder="+51 999 999 999">
+            <span class="err-msg" id="e-wa">Requerido</span>
           </div>
         </div>
-        <button class="btn-select green" id="hp-cta" onclick="openModal('Clínica PRO','S/.79/mes','mensual')">Quiero este plan →</button>
-        <div class="hp-trust">Sin contratos · Cancela cuando quieras<br>14 días gratis incluidos</div>
-      </div>
-    </div>
-  </div>
 
-  <div class="other-promos" id="otherPromos" style="margin-top:1rem"></div>
-</div>
-
-<!-- MODULES -->
-<div class="mod-section" id="modulos">
-  <div class="mod-inner">
-    <div class="sec-ey">Lo que obtienes</div>
-    <div class="sec-h">Todo lo que incluye para tu veterinaria</div>
-    <div class="sec-sub">12 módulos integrados · Sin costos adicionales</div>
-    <div class="mods-grid">
-      <div class="mod-c"><span class="mod-em">📊</span><div><div class="mod-n">Dashboard</div><div class="mod-d">Métricas en tiempo real</div></div></div>
-      <div class="mod-c"><span class="mod-em">📅</span><div><div class="mod-n">Citas</div><div class="mod-d">Agenda y recordatorios</div></div></div>
-      <div class="mod-c"><span class="mod-em">👥</span><div><div class="mod-n">Propietarios</div><div class="mod-d">Base de clientes</div></div></div>
-      <div class="mod-c"><span class="mod-em">🐾</span><div><div class="mod-n">Mascotas</div><div class="mod-d">Fichas completas</div></div></div>
-      <div class="mod-c"><span class="mod-em">🩺</span><div><div class="mod-n">Historia Clínica</div><div class="mod-d">Consultas y prescripciones</div></div></div>
-      <div class="mod-c"><span class="mod-em">📦</span><div><div class="mod-n">Inventario</div><div class="mod-d">Stock y alertas</div></div></div>
-      <div class="mod-c"><span class="mod-em">🧾</span><div><div class="mod-n">Facturación</div><div class="mod-d">Comprobantes y anulación</div></div></div>
-      <div class="mod-c"><span class="mod-em">💰</span><div><div class="mod-n">Cierre de Caja</div><div class="mod-d">Control de efectivo</div></div></div>
-      <div class="mod-c"><span class="mod-em">🔧</span><div><div class="mod-n">Servicios</div><div class="mod-d">Catálogo de precios</div></div></div>
-      <div class="mod-c"><span class="mod-em">📈</span><div><div class="mod-n">Reportes</div><div class="mod-d">Análisis e ingresos</div></div></div>
-      <div class="mod-c"><span class="mod-em">📄</span><div><div class="mod-n">Consentimientos</div><div class="mod-d">Firmas digitales</div></div></div>
-      <div class="mod-c"><span class="mod-em">💬</span><div><div class="mod-n">WhatsApp</div><div class="mod-d">Notificaciones automáticas</div></div></div>
-    </div>
-  </div>
-</div>
-
-<!-- FAQ -->
-<div class="faq-sec" id="faq">
-  <div class="sec-h" style="margin-bottom:2rem">Preguntas frecuentes</div>
-  <div class="faq-item">
-    <div class="faq-q" onclick="tf(this)">¿Hasta cuándo dura la promoción?<svg class="faq-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
-    <div class="faq-a">La promoción está activa hasta el 31 de agosto de 2026. Después, los precios vuelven a los valores regulares para nuevos clientes.</div>
-  </div>
-  <div class="faq-item">
-    <div class="faq-q" onclick="tf(this)">¿Qué diferencia hay entre los ciclos de pago?<svg class="faq-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
-    <div class="faq-a">El precio mensual es siempre S/.79 durante la promoción. La diferencia está en cuánto pagas por adelantado: mensual (S/.79), trimestral (S/.237), semestral (S/.474) o anual (S/.948).</div>
-  </div>
-  <div class="faq-item">
-    <div class="faq-q" onclick="tf(this)">¿Puedo cambiar de plan después?<svg class="faq-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
-    <div class="faq-a">Sí, puedes subir de plan en cualquier momento sin penalidades. El cobro se ajusta de forma proporcional al ciclo activo.</div>
-  </div>
-  <div class="faq-item">
-    <div class="faq-q" onclick="tf(this)">¿Mis datos están seguros?<svg class="faq-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
-    <div class="faq-a">Cada clínica tiene su propia base de datos completamente aislada y cifrada con SSL. Backups automáticos incluidos.</div>
-  </div>
-  <div class="faq-item">
-    <div class="faq-q" onclick="tf(this)">¿Funciona en otros países de Latinoamérica?<svg class="faq-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
-    <div class="faq-a">Sí. Soporta múltiples monedas (S/., $, COP, MXN y más) y está diseñado para toda Latinoamérica.</div>
-  </div>
-</div>
-
-<!-- BOTTOM CTA -->
-<div class="bcta">
-  <h2>¿Lista tu clínica para<br><span class="g">dar el salto?</span></h2>
-  <p>No esperes a que suba el precio. La oferta vence el 31 de agosto.</p>
-  <div class="bcta-btns">
-    <button class="btn-main" onclick="openModal('Clínica PRO','S/.79/mes','mensual')">Quiero aprovechar la oferta</button>
-  </div>
-  <div class="guar-row">
-    <div class="guar-item">14 días gratis</div>
-    <div class="guar-item">Sin contratos</div>
-    <div class="guar-item">Cancela cuando quieras</div>
-    <div class="guar-item">Soporte en español</div>
-  </div>
-</div>
-
-<footer>© 2026 <em>VetNetcodip</em> — Software de gestión veterinaria para Latinoamérica</footer>
-
-<!-- ── MODAL ── -->
-<div class="modal-overlay" id="modalOverlay" onclick="closeModalOutside(event)">
-  <div class="modal" id="modal">
-    <button class="modal-close" onclick="closeModal()">✕</button>
-
-    <!-- FORM VIEW -->
-    <div id="modalForm">
-      <div class="modal-eyebrow">Casi listo 🎉</div>
-      <div class="modal-title">Déjanos tu contacto</div>
-      <div class="modal-sub">Te contactamos en menos de 24 horas para activar tu plan.</div>
-      <div class="modal-plan-pill" id="modalPlanPill">📦 Plan Clínica PRO · S/.79/mes</div>
-
-      <div class="modal-form">
-        <div class="form-row2">
-          <div class="form-group">
-            <label class="form-label">Nombre completo *</label>
-            <input class="form-input" id="m-nombre" type="text" placeholder="Dr. Juan Pérez">
-            <span class="form-err" id="me-nombre">Requerido</span>
-          </div>
-          <div class="form-group">
-            <label class="form-label">WhatsApp *</label>
-            <input class="form-input" id="m-whatsapp" type="tel" placeholder="+51 999 999 999">
-            <span class="form-err" id="me-whatsapp">Requerido</span>
-          </div>
+        <div class="field">
+          <label>Nombre de tu clínica *</label>
+          <input id="f-clinica" type="text" placeholder="Clínica Veterinaria...">
+          <span class="err-msg" id="e-clinica">Requerido</span>
         </div>
-        <div class="form-group">
-          <label class="form-label">Nombre de la clínica *</label>
-          <input class="form-input" id="m-clinica" type="text" placeholder="Clínica Veterinaria...">
-          <span class="form-err" id="me-clinica">Requerido</span>
-        </div>
-        <div class="form-row2">
-          <div class="form-group">
-            <label class="form-label">País *</label>
-            <select class="form-select form-input" id="m-pais">
+
+        <div class="grid2">
+          <div class="field">
+            <label>País *</label>
+            <select id="f-pais">
               <option value="">Selecciona</option>
               <option value="PE">🇵🇪 Perú</option>
               <option value="CO">🇨🇴 Colombia</option>
@@ -484,90 +194,119 @@ footer em { color:var(--g); font-style:normal; }
               <option value="CL">🇨🇱 Chile</option>
               <option value="EC">🇪🇨 Ecuador</option>
               <option value="BO">🇧🇴 Bolivia</option>
-              <option value="VE">🇻🇪 Venezuela</option>
               <option value="otro">Otro</option>
             </select>
-            <span class="form-err" id="me-pais">Requerido</span>
+            <span class="err-msg" id="e-pais">Requerido</span>
           </div>
-          <div class="form-group">
-            <label class="form-label">Correo electrónico</label>
-            <input class="form-input" id="m-email" type="email" placeholder="correo@clinica.com">
+          <div class="field">
+            <label>Correo electrónico</label>
+            <input id="f-email" type="email" placeholder="correo@clinica.com">
           </div>
         </div>
-        <div class="form-group">
-          <label class="form-label">¿Alguna pregunta?</label>
-          <input class="form-input" id="m-msg" type="text" placeholder="Ej: ¿Tienen prueba gratis?">
-        </div>
-        <!-- Campo oculto con el plan seleccionado -->
-        <input type="hidden" id="m-plan">
-        <input type="hidden" id="m-ciclo">
-        <input type="hidden" id="m-precio">
-        <button class="btn-submit" id="mSubmitBtn" onclick="submitModal()">Enviar mis datos →</button>
-      </div>
-    </div>
 
-    <!-- SUCCESS VIEW -->
-    <div class="modal-success" id="modalSuccess">
-      <div class="ms-icon">🎉</div>
-      <div class="ms-title">¡Recibido!</div>
-      <div class="ms-sub">Gracias, <strong id="ms-nombre"></strong>.<br>Un asesor te contactará por WhatsApp en menos de 24 horas para activar tu <strong id="ms-plan"></strong>.</div>
+        <div class="field">
+          <label>Plan de interés</label>
+          <div class="plan-select">
+            <button class="plan-btn" data-plan="Básico" onclick="selPlan(this)">Básico<br><small>S/.39/mes</small></button>
+            <button class="plan-btn" data-plan="Profesional" onclick="selPlan(this)">Profesional<br><small>S/.59/mes</small></button>
+            <button class="plan-btn sel" data-plan="Clínica PRO" onclick="selPlan(this)">Clínica PRO<br><small>S/.79/mes ⭐</small></button>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>¿Alguna pregunta o comentario?</label>
+          <textarea id="f-msg" placeholder="Ej: ¿Tienen integración con Sunat? ¿Cuántos usuarios incluye?"></textarea>
+        </div>
+
+        <div id="apiErr" style="display:none;background:#fef2f2;border:1px solid #fecaca;border-radius:8px;padding:.625rem .875rem;font-size:12px;color:#991b1b;margin-bottom:.5rem"></div>
+
+        <button class="btn-submit" id="btnSubmit" onclick="submitForm()">
+          📅 Quiero mi demo gratuita →
+        </button>
+        <p class="form-trust">Sin compromiso · Te contactamos por WhatsApp en &lt; 2 horas</p>
+      </div>
+
+      <div class="success-card" id="successView">
+        <div class="sc-icon">🎉</div>
+        <div class="sc-title">¡Solicitud recibida!</div>
+        <div class="sc-sub">
+          Gracias, <strong id="sc-nombre"></strong>.<br>
+          Un especialista de <em style="color:var(--g)">VetNetcodip</em> te contactará por WhatsApp
+          en menos de 2 horas para coordinar tu demo gratuita.<br><br>
+          <span style="font-size:12px;opacity:.8">Revisa tu WhatsApp: <strong id="sc-wa"></strong></span>
+        </div>
+      </div>
     </div>
   </div>
 </div>
 
+<!-- WHY -->
+<div class="why">
+  <div class="sec-ey">¿Por qué una demo?</div>
+  <div class="sec-h">Ve el sistema en acción</div>
+  <div class="why-grid">
+    <div class="why-card"><span class="why-icon">👁️</span><div><div class="why-title">Lo ves en vivo</div><div class="why-desc">No videos grabados. Un especialista te muestra exactamente lo que necesitas.</div></div></div>
+    <div class="why-card"><span class="why-icon">🎯</span><div><div class="why-title">Personalizada</div><div class="why-desc">La demo se adapta a tu tipo de clínica y los módulos que más te interesan.</div></div></div>
+    <div class="why-card"><span class="why-icon">❓</span><div><div class="why-title">Resolvemos dudas</div><div class="why-desc">Preguntas en tiempo real sobre precios, integraciones, soporte y más.</div></div></div>
+    <div class="why-card"><span class="why-icon">⚡</span><div><div class="why-title">Solo 30 minutos</div><div class="why-desc">Breve y al grano. Sin rodeos, vemos lo que importa para tu clínica.</div></div></div>
+  </div>
+</div>
+
+<!-- MODULES -->
+<div class="mods">
+  <div class="mods-inner">
+    <div class="sec-ey">Qué verás en la demo</div>
+    <div class="sec-h">12 módulos integrados</div>
+    <div class="mods-grid">
+      <div class="mod"><span class="mod-em">📊</span><div><div class="mod-n">Dashboard</div><div class="mod-d">Métricas en vivo</div></div></div>
+      <div class="mod"><span class="mod-em">📅</span><div><div class="mod-n">Citas</div><div class="mod-d">Agenda inteligente</div></div></div>
+      <div class="mod"><span class="mod-em">🐾</span><div><div class="mod-n">Pacientes</div><div class="mod-d">Fichas completas</div></div></div>
+      <div class="mod"><span class="mod-em">🩺</span><div><div class="mod-n">Historia Clínica</div><div class="mod-d">Consultas y recetas</div></div></div>
+      <div class="mod"><span class="mod-em">📦</span><div><div class="mod-n">Inventario</div><div class="mod-d">Stock y alertas</div></div></div>
+      <div class="mod"><span class="mod-em">🧾</span><div><div class="mod-n">Facturación</div><div class="mod-d">Comprobantes</div></div></div>
+      <div class="mod"><span class="mod-em">💰</span><div><div class="mod-n">Caja</div><div class="mod-d">Control de efectivo</div></div></div>
+      <div class="mod"><span class="mod-em">💬</span><div><div class="mod-n">WhatsApp</div><div class="mod-d">Notificaciones auto</div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- FAQ -->
+<div class="faq">
+  <div class="sec-h" style="margin-bottom:1.5rem">Preguntas frecuentes</div>
+  <div class="faq-item">
+    <div class="faq-q" onclick="tf(this)">¿La demo es realmente gratis?<svg class="faq-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+    <div class="faq-a">Sí, completamente gratis y sin compromiso de compra. Un especialista dedica 30 minutos a mostrarte el sistema adaptado a tu clínica.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q" onclick="tf(this)">¿Cuánto demora en contactarme?<svg class="faq-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+    <div class="faq-a">En horario de oficina (Lun–Vie 9am–6pm Lima), en menos de 2 horas. Fuera de ese horario, a primera hora del siguiente día hábil.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q" onclick="tf(this)">¿Necesito instalar algo?<svg class="faq-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+    <div class="faq-a">No. La demo es 100% en línea por videollamada (Zoom o Google Meet). Solo necesitas una computadora o celular con internet.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q" onclick="tf(this)">¿Qué pasa después de la demo?<svg class="faq-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+    <div class="faq-a">Si te convence, activas tu prueba de 14 días gratis sin tarjeta. Si no, no hay ningún compromiso ni cargo.</div>
+  </div>
+</div>
+
+<!-- BOTTOM CTA -->
+<div class="bcta">
+  <h2>¿Lista tu clínica para<br><span class="g">la demo?</span></h2>
+  <p>Agenda ahora y aprovecha la oferta especial antes del 31 de agosto.</p>
+  <a href="#demo" class="nav-cta" style="padding:14px 32px;font-size:15px;border-radius:10px;display:inline-block;box-shadow:0 0 30px rgba(16,185,129,.3)">📅 Agendar demo gratis →</a>
+</div>
+
+<footer>© 2026 <em>VetNetcodip</em> — Software de gestión veterinaria para Latinoamérica</footer>
+
 <script>
-// Variables globales para los onclick inline del HTML
-var rlCy = 'mensual';
-var hpCy = 'mensual';
+var planSel = 'Clínica PRO';
 
-function setRL(c) {
-  rlCy = c;
-  ['mensual','trimestral','semestral','anual'].forEach(function(k){
-    var el = document.getElementById('rl-'+k);
-    if(el) el.classList.toggle('active', k===c);
-  });
-  renderRegular();
-}
-
-function setHP(c) {
-  hpCy = c;
-  ['mensual','trimestral','semestral','anual'].forEach(function(k){
-    var el = document.getElementById('hp-'+k);
-    if(el) el.classList.toggle('active', k===c);
-  });
-  var m = cy[c].m, lbl = cy[c].lbl;
-  var tot = 79*m, saved = 119*m - tot;
-  document.getElementById('hpc-cycle-lbl').textContent = m===1 ? 'pago mensual' : 'pago '+lbl;
-  document.getElementById('hpc-total').textContent = m>1 ? 'Total: S/.'+tot+' '+lbl : '';
-  document.getElementById('hpc-save').textContent = 'Ahorras S/.'+saved+' '+(m>1?lbl:'al mes');
-  var precio = m>1 ? 'S/.'+tot+' '+lbl : 'S/.79/mes';
-  document.getElementById('hp-cta').onclick = function(){ openModal('Clínica PRO', precio, c); };
-  renderOtherPromos();
-}
-
-function openModal(plan, precio, ciclo) {
-  document.getElementById('m-plan').value   = plan;
-  document.getElementById('m-ciclo').value  = ciclo;
-  document.getElementById('m-precio').value = precio;
-  document.getElementById('modalPlanPill').textContent = '📦 '+plan+' · '+precio;
-  document.getElementById('modalForm').style.display = 'block';
-  document.getElementById('modalSuccess').style.display = 'none';
-  document.getElementById('mSubmitBtn').disabled = false;
-  document.getElementById('mSubmitBtn').textContent = 'Enviar mis datos →';
-  ['nombre','whatsapp','clinica','pais'].forEach(function(f){
-    document.getElementById('me-'+f).style.display='none';
-  });
-  document.getElementById('modalOverlay').classList.add('open');
-  document.body.style.overflow = 'hidden';
-}
-
-function closeModal() {
-  document.getElementById('modalOverlay').classList.remove('open');
-  document.body.style.overflow = '';
-}
-
-function closeModalOutside(e) {
-  if(e.target === document.getElementById('modalOverlay')) closeModal();
+function selPlan(btn) {
+  document.querySelectorAll('.plan-btn').forEach(function(b){ b.classList.remove('sel'); });
+  btn.classList.add('sel');
+  planSel = btn.dataset.plan;
 }
 
 function tf(el) {
@@ -575,106 +314,54 @@ function tf(el) {
   el.nextElementSibling.classList.toggle('open');
 }
 
-function submitModal() {
-  var nombre   = document.getElementById('m-nombre').value.trim();
-  var whatsapp = document.getElementById('m-whatsapp').value.trim();
-  var clinica  = document.getElementById('m-clinica').value.trim();
-  var pais     = document.getElementById('m-pais').value;
-  var email    = document.getElementById('m-email').value.trim();
-  var msg      = document.getElementById('m-msg').value.trim();
-  var plan     = document.getElementById('m-plan').value;
-  var ciclo    = document.getElementById('m-ciclo').value;
-  var precio   = document.getElementById('m-precio').value;
+async function submitForm() {
+  var nombre  = document.getElementById('f-nombre').value.trim();
+  var wa      = document.getElementById('f-wa').value.trim();
+  var clinica = document.getElementById('f-clinica').value.trim();
+  var pais    = document.getElementById('f-pais').value;
+  var email   = document.getElementById('f-email').value.trim();
+  var msg     = document.getElementById('f-msg').value.trim();
+
   var ok = true;
-  [['me-nombre',nombre],['me-whatsapp',whatsapp],['me-clinica',clinica],['me-pais',pais]].forEach(function(pair){
-    document.getElementById(pair[0]).style.display = pair[1] ? 'none' : 'block';
-    if(!pair[1]) ok = false;
+  [['e-nombre',nombre],['e-wa',wa],['e-clinica',clinica],['e-pais',pais]].forEach(function(p){
+    document.getElementById(p[0]).style.display = p[1] ? 'none' : 'block';
+    if (!p[1]) ok = false;
   });
-  if(!ok) return;
-  var btn = document.getElementById('mSubmitBtn');
-  btn.disabled = true; btn.textContent = 'Enviando...';
+  if (!ok) return;
 
-  // ── ENDPOINT BACKEND ─────────────────────────────────
-  // fetch('/api/leads', {
-  //   method:'POST',
-  //   headers:{'Content-Type':'application/json'},
-  //   body:JSON.stringify({nombre,whatsapp,clinica,pais,email,mensaje:msg,plan,ciclo,precio,fecha:new Date().toISOString()})
-  // }).then(function(){ showSuccess(nombre,plan); }).catch(function(){ btn.disabled=false; btn.textContent='Enviar mis datos →'; });
+  var btn = document.getElementById('btnSubmit');
+  btn.disabled = true; btn.textContent = '⏳ Enviando...';
+  document.getElementById('apiErr').style.display = 'none';
 
-  setTimeout(function(){ showSuccess(nombre, plan); }, 800);
+  try {
+    var r = await fetch('/api/leads', {
+      method:  'POST',
+      headers: {'Content-Type':'application/json'},
+      body:    JSON.stringify({ nombre, whatsapp: wa, clinica, pais, email, plan: planSel, ciclo: 'Mensual', mensaje: msg })
+    });
+    var d = await r.json();
+    if (!d.ok) throw new Error(d.error || 'Error al enviar');
+    document.getElementById('formView').style.display = 'none';
+    document.getElementById('sc-nombre').textContent = nombre.split(' ')[0];
+    document.getElementById('sc-wa').textContent = wa;
+    document.getElementById('successView').style.display = 'block';
+  } catch(e) {
+    document.getElementById('apiErr').textContent = '⚠️ ' + e.message + '. Intenta de nuevo o escríbenos directamente.';
+    document.getElementById('apiErr').style.display = 'block';
+    btn.disabled = false; btn.textContent = '📅 Quiero mi demo gratuita →';
+  }
 }
 
-function showSuccess(nombre, plan) {
-  document.getElementById('modalForm').style.display = 'none';
-  document.getElementById('ms-nombre').textContent = nombre.split(' ')[0];
-  document.getElementById('ms-plan').textContent = plan;
-  document.getElementById('modalSuccess').style.display = 'block';
-}
-
-// Datos y render — se ejecutan al cargar
-var plans = [
-  { id:'basico', name:'Básico', desc:'Para clínicas pequeñas que recién empiezan a digitalizar.', promo:39, regular:59,
-    features:[{ok:true,t:'Hasta 2 veterinarios'},{ok:true,t:'Dashboard y citas'},{ok:true,t:'Mascotas y propietarios'},{ok:true,t:'Historia clínica básica'},{ok:true,t:'Facturación'},{ok:false,t:'Inventario y stock'},{ok:false,t:'Cierre de caja'},{ok:false,t:'Reportes avanzados'},{ok:false,t:'Consentimientos digitales'},{ok:false,t:'WhatsApp y carnet QR'}] },
-  { id:'profesional', name:'Profesional', desc:'Para clínicas en crecimiento que necesitan más funciones.', promo:59, regular:89,
-    features:[{ok:true,t:'Hasta 5 veterinarios'},{ok:true,t:'Dashboard y citas'},{ok:true,t:'Mascotas y propietarios'},{ok:true,t:'Historia clínica completa'},{ok:true,t:'Facturación + anulación'},{ok:true,t:'Inventario y stock'},{ok:true,t:'Cierre de caja'},{ok:true,t:'Reportes avanzados'},{ok:false,t:'Consentimientos digitales'},{ok:false,t:'WhatsApp y carnet QR'}] },
-];
-var allPlans = plans.concat([{ id:'clinica', name:'Clínica PRO', desc:'Todo incluido. El plan más completo del mercado.', promo:79, regular:119,
-  features:[{ok:true,t:'Veterinarios ilimitados'},{ok:true,t:'Dashboard y citas'},{ok:true,t:'Mascotas y propietarios'},{ok:true,t:'Historia clínica completa'},{ok:true,t:'Facturación + anulación'},{ok:true,t:'Inventario y stock'},{ok:true,t:'Cierre de caja'},{ok:true,t:'Reportes avanzados'},{ok:true,t:'Consentimientos digitales'},{ok:true,t:'WhatsApp y carnet QR'}] }]);
-
-var cy = { mensual:{m:1}, trimestral:{m:3,lbl:'cada 3 meses'}, semestral:{m:6,lbl:'cada 6 meses'}, anual:{m:12,lbl:'al año'} };
-var chk = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>';
-var xmk = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>';
-
-function feats(arr){ return arr.map(function(f){ return '<li class="'+(f.ok?'on':'off')+'"><span class="'+(f.ok?'ico-ok':'ico-no')+'">'+(f.ok?chk:xmk)+'</span><span>'+f.t+'</span></li>'; }).join(''); }
-
-/* REGULAR */
-function renderRegular(){
-  var c = cy[rlCy], m = c.m, lbl = c.lbl;
-  document.getElementById('regularGrid').innerHTML = allPlans.map(function(p){
-    var tot = p.regular*m, ts = m>1 ? 'Total: S/.'+tot+' '+lbl : '&nbsp;';
-    return '<div class="plan-card">'
-      +'<div class="pname">'+p.name+'</div>'
-      +'<div class="pprice-wrap"><span class="psym">S/.</span><span class="pnum">'+p.regular+'</span><span class="pmo">/mes</span></div>'
-      +'<div class="ptotal">'+ts+'</div>'
-      +'<div class="pdesc">'+p.desc+'</div>'
-      +'<ul class="feats">'+feats(p.features)+'</ul>'
-      +'<button class="btn-select" onclick="document.getElementById(\'promo\').scrollIntoView({behavior:\'smooth\'})">Ver precio con descuento →</button>'
-      +'</div>';
-  }).join('');
-}
-
-/* PROMO */
-function renderOtherPromos(){
-  var c = cy[hpCy], m = c.m, lbl = c.lbl;
-  document.getElementById('otherPromos').innerHTML = plans.map(function(p){
-    var pt = p.promo*m, rt = p.regular*m, saved = rt-pt;
-    var precio = m>1 ? 'S/.'+pt+' '+lbl : 'S/.'+p.promo+'/mes';
-    return '<div class="op-card">'
-      +'<span class="op-promo-tag">🏷 Promo hasta 31 ago 2026</span>'
-      +'<div class="pname">'+p.name+'</div>'
-      +'<div class="pprice-wrap"><span class="psym">S/.</span><span class="pnum">'+p.promo+'</span><span class="pmo">/mes</span></div>'
-      +'<div class="op-old">Antes <s>S/.'+p.regular+'/mes</s></div>'
-      +'<div class="op-total">'+(m>1?'Total: S/.'+pt+' '+lbl:'&nbsp;')+'</div>'
-      +'<div class="op-save">Ahorras S/.'+saved+' '+(m>1?lbl:'al mes')+'</div>'
-      +'<div class="op-desc">'+p.desc+'</div>'
-      +'<ul class="feats">'+feats(p.features)+'</ul>'
-      +'<button class="btn-select" onclick="openModal(\''+p.name+'\',\''+precio+'\',\''+hpCy+'\')">Quiero el plan '+p.name+' →</button>'
-      +'</div>';
-  }).join('');
-}
-
-document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeModal(); });
-
+// Countdown
 function tick(){
   var diff = new Date('2026-08-31T23:59:59') - new Date();
-  if(diff<=0) return;
-  document.getElementById('ucd-d').textContent = String(Math.floor(diff/86400000)).padStart(2,'0');
-  document.getElementById('ucd-h').textContent = String(Math.floor(diff%86400000/3600000)).padStart(2,'0');
-  document.getElementById('ucd-m').textContent = String(Math.floor(diff%3600000/60000)).padStart(2,'0');
-  document.getElementById('ucd-s').textContent = String(Math.floor(diff%60000/1000)).padStart(2,'0');
+  if (diff <= 0) return;
+  document.getElementById('ud').textContent = String(Math.floor(diff/86400000)).padStart(2,'0');
+  document.getElementById('uh').textContent = String(Math.floor(diff%86400000/3600000)).padStart(2,'0');
+  document.getElementById('um').textContent = String(Math.floor(diff%3600000/60000)).padStart(2,'0');
+  document.getElementById('us').textContent = String(Math.floor(diff%60000/1000)).padStart(2,'0');
 }
-
-renderRegular(); setHP('mensual'); tick(); setInterval(tick, 1000);
+tick(); setInterval(tick, 1000);
 </script>
 </body>
 </html>
