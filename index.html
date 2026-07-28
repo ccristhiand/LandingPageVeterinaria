@@ -334,7 +334,7 @@ async function submitForm() {
   document.getElementById('apiErr').style.display = 'none';
 
   try {
-    var r = await fetch('/api/leads', {
+    var r = await fetch('https://places-scraper.netcodip.com/api/leads', {
       method:  'POST',
       headers: {'Content-Type':'application/json'},
       body:    JSON.stringify({ nombre, whatsapp: wa, clinica, pais, email, plan: planSel, ciclo: 'Mensual', mensaje: msg })
