@@ -319,7 +319,7 @@ footer em{color:var(--g);font-style:normal}
 
 <!-- URGENCY BAR -->
 <div class="urgency-bar">
-  <span>⚡ Oferta especial — Solo hasta el 30 de septiembre 2026</span>
+  <span>⚡ Oferta especial — Solo hasta el 31 de octubre 2026</span>
   <div class="ucd-wrap">
     <div class="ucd" id="ud">--</div><span class="ucd-sep">d</span>
     <div class="ucd" id="uh">--</div><span class="ucd-sep">h</span>
@@ -350,7 +350,7 @@ footer em{color:var(--g);font-style:normal}
   <p class="hero-sub">Deja de perder tiempo con papeles, Excel y llamadas perdidas. VetNetcodip centraliza todo: citas, historiales, inventario, caja y mucho más.</p>
 
   <div class="promo-pill">
-    <span class="pp-badge">🎁 Oferta sep 2026</span>
+    <span class="pp-badge">🎁 Oferta oct 2026</span>
     <span class="pp-text">Plan Clínica PRO por solo</span>
     <div>
       <span class="pp-price">S/.79</span>
@@ -550,7 +550,7 @@ footer em{color:var(--g);font-style:normal}
   </div>
   <div class="faq-item">
     <div class="faq-q" onclick="tf(this)">¿Hasta cuándo es la oferta de S/.79/mes?<svg class="faq-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
-    <div class="faq-a">La oferta es válida hasta el 30 de septiembre de 2026. Después, el Plan Clínica PRO vuelve a su precio regular de S/.119/mes.</div>
+    <div class="faq-a">La oferta es válida hasta el 31 de octubre de 2026. Después, el Plan Clínica PRO vuelve a su precio regular de S/.119/mes.</div>
   </div>
   <div class="faq-item">
     <div class="faq-q" onclick="tf(this)">¿Qué pasa después de la demo?<svg class="faq-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
@@ -561,7 +561,7 @@ footer em{color:var(--g);font-style:normal}
 <!-- BOTTOM CTA -->
 <div class="bcta">
   <h2>¿Lista tu clínica para<br><span class="g">dar el salto?</span></h2>
-  <p>Agenda tu demo ahora y aprovecha el precio especial antes del 30 de septiembre.</p>
+  <p>Agenda tu demo ahora y aprovecha el precio especial antes del 31 de octubre.</p>
   <a href="#demo" class="btn-big">📅 Agendar demo gratuita →</a>
   <div class="bcta-trust">
     <div class="bcta-trust-item">Demo gratis 30 min</div>
@@ -627,7 +627,7 @@ async function submitForm() {
 }
 
 function tick() {
-  var diff = new Date('2026-09-30T23:59:59') - new Date();
+  var diff = new Date('2026-10-31T23:59:59') - new Date();
   if (diff <= 0) return;
   document.getElementById('ud').textContent = String(Math.floor(diff/86400000)).padStart(2,'0');
   document.getElementById('uh').textContent = String(Math.floor(diff%86400000/3600000)).padStart(2,'0');
